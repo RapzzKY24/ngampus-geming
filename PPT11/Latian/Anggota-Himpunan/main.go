@@ -33,7 +33,7 @@ func frekuensi(t tabArray, n int, x int) int {
 }
 
 func tableFrekuensi(t1 tabArray, n int, t2 *tabArray) {
-	m := 10
+	m := 10 // asumsikan maksimal frekuensi 1 - 10
 	i := 0
 	for i <= m {
 		t2[i] = frekuensi(t1, n, i)
