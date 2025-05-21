@@ -54,6 +54,25 @@ func main() {
 		fmt.Scan(&t[i])
 	}
 
+	println("Array yang dimasukkan adalah:")
+	for i := 0; i < n; i++ {
+		fmt.Print(t[i], " ")
+	}
+	println()
+	println("Frekuensi elemen dalam array:")
+	for i := 0; i < n; i++ {
+		fmt.Print(t[i], ":", frekuensi(t, n, t[i]), " ")
+	}
+	println()
+
+	println("Tabel frekuensi:")
+	var t2 tabArray
+	membuatTabel(t, &t2, n, 10)
+	for i := 0; i < 10; i++ {
+		fmt.Print(i, ":", t2[i], " ")
+	}
+	println()
+
 	result := modus(t, n)
 
 	println("Modus dari array adalah:", result)
