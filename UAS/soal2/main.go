@@ -24,7 +24,7 @@ func inputDataDosen(t *tabDosen, n *int) {
 		fmt.Printf("Masukkan Gaji dosen ke-%d : ",i+1)
 		fmt.Scan(&inputGaji)
 		fmt.Println()
-		t[i] = Dosen{
+		(*t)[i] = Dosen{
 			nama: inputNama,
 			nip: inputNIP,
 			gaji: inputGaji,
@@ -55,9 +55,9 @@ func cariDosen (t *tabDosen, n int,gaji int)int{
 	right := n-1
 	for left <= right {
 		mid := (left+right)/2
-		if t[mid].gaji == gaji{
+		if (*t)[mid].gaji == gaji{
 			return mid
-		}else if t[mid].gaji < gaji{
+		}else if(*t)[mid].gaji < gaji{
 			right = mid -1
 		}else {
 			left = mid +1

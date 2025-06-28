@@ -42,7 +42,7 @@ func cariDosen(t tabDosen,n int,nip string)int{
 	return -1
 }
 
-func printDosen(t tabDosen, n int,nip string){
+func cetakPencarian(t tabDosen, n int,nip string){
 	seqSearchResult := cariDosen(t,n,nip)
 	if seqSearchResult >= 0 {
 		fmt.Println("Dosen ditemukan: ",t[seqSearchResult].nama,t[seqSearchResult].nip,t[seqSearchResult].gaji)
@@ -61,5 +61,5 @@ func main(){
 
 	fmt.Println() // biar ada spasi
 
-	printDosen(dataDosen,jmlhDosen,nipTarget)
+	cetakPencarian(dataDosen,jmlhDosen,nipTarget)
 }

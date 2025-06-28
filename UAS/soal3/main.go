@@ -8,7 +8,7 @@ type Student struct {
 	gpa       float64
 }
 
-const NMAX = 2025
+const NMAX int = 2025
 
 type tabStudent [NMAX]Student
 
@@ -27,7 +27,7 @@ func inputStudent(s *tabStudent, n *int) {
 		fmt.Scan(&inputAge)
 		// fmt.Printf("Masukkan GPA mahasiswa ke-%d: ", i+1)
 		fmt.Scan(&inputGPA)
-		s[i] = Student{
+		(*s)[i] = Student{
 			name: inputName,
 			sid:  inputSID,
 			age:  inputAge,
@@ -52,13 +52,23 @@ func selectionSortGpaASC(s *tabStudent,n int){
 
 func insertionSortAgeDesc(s *tabStudent, n int) {
 	for i := 1; i < n; i++ {
-		key := (*s)[i]
-		j := i - 1
+		key := (*s)[i] // Ambil elemen yang akan disisipkan
+		// Pindahkan elemen yang lebih kecil dari key ke satu posisi ke kanan
+		j := i - 1 // Indeks elemen sebelumnya
+		// Urutkan berdasarkan umur secara menurun
 		for j >= 0 && (*s)[j].age < key.age {
+			// Pindahkan elemen ke kanan
 			(*s)[j+1] = (*s)[j]
 			j--
 		}
+		// Sisipkan elemen key pada posisi yang benar
 		(*s)[j+1] = key
+	}
+}
+
+func cetakSorting(s *tabStudent, n int) {
+	for i := 0; i < n; i++ {
+		fmt.Printf("Nama: %s, SID: %s, Umur: %d, GPA: %.2f\n", (*s)[i].name, (*s)[i].sid, (*s)[i].age, (*s)[i].gpa)
 	}
 }
 
@@ -68,12 +78,9 @@ func main() {
 	inputStudent(&dataMhs,&jmlhMhs)
 	selectionSortGpaASC(&dataMhs, jmlhMhs)
 	fmt.Println("Data mahasiswa setelah diurutkan berdasarkan GPA (Ascending):")
-	for i := 0; i < jmlhMhs; i++ {
-		fmt.Printf("Nama: %s, SID: %s, Umur: %d, GPA: %.2f\n", dataMhs[i].name, dataMhs[i].sid, dataMhs[i].age, dataMhs[i].gpa)
-	}
+	cetakSorting(&dataMhs, jmlhMhs)
+	fmt.Println()
 	insertionSortAgeDesc(&dataMhs, jmlhMhs)
-	fmt.Println("\nData mahasiswa setelah diurutkan berdasarkan Umur (Descending):")
-	for i := 0; i < jmlhMhs; i++ {
-		fmt.Printf("Nama: %s, SID: %s, Umur: %d, GPA: %.2f\n", dataMhs[i].name, dataMhs[i].sid, dataMhs[i].age, dataMhs[i].gpa)
-	}
+	fmt.Println("Data mahasiswa setelah diurutkan berdasarkan Umur (Descending):")
+	cetakSorting(&dataMhs, jmlhMhs)
 }
